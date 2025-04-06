@@ -10,4 +10,4 @@ This is a Home Assistant add-on to run [Fermentrack](https://github.com/thorrak/
 ## Installation
 1. Clone this repository into your Home Assistant `addons/local` directory:
    ```bash
-   git clone https://github.com/<your-username>/fermentrack-addon.git addons/local/fermentrack
+   git clone https://github.com/soulen77/Fermentrack-addon.git addons/local/fermentrack
