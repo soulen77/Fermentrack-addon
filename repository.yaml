@@ -1,0 +1,4 @@
+# https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
+name: Fermentrack-addon
+url: 'https://github.com/soulen77/Fermentrack-addon'
+maintainer: soulen77@gmail.com
