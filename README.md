@@ -1,11 +1,13 @@
-Example Home Assistant Fermentrack-addon repository
+# Fermentrack Home Assistant Add-on
 
-Add-on documentation: https://developers.home-assistant.io/docs/add-ons
+This is a Home Assistant add-on to run [Fermentrack](https://github.com/thorrak/fermentrack), a web-based tool for managing fermentation controllers.
 
-Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.
+## Features
+- Runs Fermentrack with Django and Gunicorn.
+- Supports SQLite for database storage.
+- Configurable via Home Assistant add-on options.
 
-Add-ons
-This repository contains the following add-ons
-
-Example add-on
-Supports aarch64 Architecture Supports amd64 Architecture Supports armv7 Architecture Supports 
+## Installation
+1. Clone this repository into your Home Assistant `addons/local` directory:
+   ```bash
+   git clone https://github.com/<your-username>/fermentrack-addon.git addons/local/fermentrack
