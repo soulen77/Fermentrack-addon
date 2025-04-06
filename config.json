@@ -1,0 +1,32 @@
+{
+  "name": "Fermentrack",
+  "version": "1.0",
+  "slug": "fermentrack",
+  "description": "A Home Assistant add-on to run Fermentrack",
+  "arch": ["amd64", "armv7", "aarch64"],
+  "startup": "application",
+  "boot": "auto",
+  "ports": {
+    "8080/tcp": 8080
+  },
+  "options": {
+    "django_secret_key": "django_secret_key",
+    "database_path": "data/db.sqlite3"
+  },
+  "schema": {
+    "django_secret_key": "str",
+    "database_path": "str?"
+  },
+  "build": {
+    "scripts": [
+      "COPY run.sh /app/fermentrack/run.sh",
+      "RUN chmod +x /app/fermentrack/run.sh"
+    ],
+    "environment": {
+      "DJANGO_SECRET_KEY": "your-secret-key"
+    }
+  }
+}
+
+
+
