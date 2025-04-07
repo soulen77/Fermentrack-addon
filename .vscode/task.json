@@ -51,7 +51,7 @@
     {
       "id": "Fermentrack",
       "type": "pickString",
-      "description": "Name of addon (to add your addon to this list, please edit .vscode/tasks.json)",
+      "description": "Fermentrack Addon for Home Assistant",
       "options": [
         "example",
       ]
