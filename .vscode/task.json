@@ -49,7 +49,7 @@
   ],
   "inputs": [
     {
-      "id": "Fermentrack",
+      "id": "fermentrack",
       "type": "pickString",
       "description": "Fermentrack Addon for Home Assistant",
       "options": [
