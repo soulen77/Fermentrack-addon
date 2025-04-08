@@ -13,6 +13,10 @@ cd /app/fermentrack
 # Add the current directory to the Python path
 export PYTHONPATH=/app/fermentrack:$PYTHONPATH
 
+# Ensure __init__.py exists in the Fermentrack directory
+echo "Ensuring __init__.py exists in the Fermentrack directory..."
+touch /app/fermentrack/__init__.py
+
 # Run database migrations
 echo "Running database migrations..."
 if ! python3 manage.py migrate; then
