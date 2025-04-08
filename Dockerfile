@@ -12,6 +12,7 @@ RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack \
     && pip3 install django-constance[database] \
     && pip3 install gunicorn
 RUN ls -l /app
+RUN echo "Current working directory: $(pwd)"
 
 # Set working directory
 WORKDIR /app/fermentrack
