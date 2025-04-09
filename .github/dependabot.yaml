@@ -1,7 +1,0 @@
-version: w
-updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: weekly
-      time: "06:00"
