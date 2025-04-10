@@ -16,7 +16,7 @@ RUN ls -l /app
 WORKDIR /app/fermentrack
 
 # Copy the entrypoint script
-COPY Fermentrack/run.sh /app/fermentrack/run.sh
+COPY run.sh /app/fermentrack/run.sh
 RUN chmod +x /app/fermentrack/run.sh
 
 # Set environment variables
