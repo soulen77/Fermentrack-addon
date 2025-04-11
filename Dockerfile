@@ -18,5 +18,5 @@ WORKDIR /app/fermentrack
 # Set environment variables
 ENV DJANGO_SECRET_KEY="your-secret-key"
 
-ENTRYPOINT ["/init"]
+CMD ["run.sh"]
 
