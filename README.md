@@ -3,7 +3,7 @@
 This is a Home Assistant add-on to run [Fermentrack](https://github.com/thorrak/fermentrack), a web-based tool for managing fermentation controllers.
 
 ## Features
-- Runs Fermentrack with Django and Gunicorn.
+- Runs Fermentrack.
 - Supports SQLite for database storage.
 - Configurable via Home Assistant add-on options.
 
