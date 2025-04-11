@@ -20,5 +20,6 @@ fi
 # done
 
 # Start the Django server with production-ready configurations
-echo "Starting Fermentrack..."
-exec /app/venv/bin/python manage.py runserver 0.0.0.0:8080
+echo "Starting Django server with Gunicorn..."
+exec gunicorn fermentrack.wsgi:application --bind 0.0.0.0:8080 --workers 3 --log-level info
+
