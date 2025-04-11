@@ -21,4 +21,4 @@ fi
 
 # Start the Django server with production-ready configurations
 echo "Starting Django server with Gunicorn..."
-exec /fermentrack/brewpi-script/utils/updateCronCircus.sh --bind 0.0.0.0:8080
+exec /updateCronCircus.sh --bind 0.0.0.0:8080
