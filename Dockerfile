@@ -3,8 +3,10 @@ FROM debian:bullseye-slim
 # Install prerequisites
 RUN apt-get update && apt-get install -y \
     git python3 python3-pip python3-venv sqlite3 nginx \
-    gunicorn
     && apt-get clean
+    
+# Ensure gunicorn is installed (redundant if it's in requirements.txt)
+RUN pip install gunicorn
 
 # Clone Fermentrack repository
 RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack \
