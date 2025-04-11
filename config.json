@@ -6,7 +6,7 @@
   "arch": ["amd64", "armv7", "aarch64"],
   "startup": "services",
   "boot": "auto",
-  "init": false
+  "init": "false",
   "ports": {
     "8080/tcp": 8080
   },
