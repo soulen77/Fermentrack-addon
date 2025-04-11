@@ -21,4 +21,4 @@ fi
 
 # Start the Django server with production-ready configurations
 echo "Starting Django server with Gunicorn..."
-python /app/manage.py collectstatic --noinput --bind 0.0.0.0:8080
+exec fermentrack --bind 0.0.0.0:8080
