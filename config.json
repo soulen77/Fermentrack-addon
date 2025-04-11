@@ -4,8 +4,9 @@
   "slug": "fermentrack",
   "description": "A Home Assistant add-on to run Fermentrack",
   "arch": ["amd64", "armv7", "aarch64"],
-  "startup": "application",
+  "startup": "services",
   "boot": "auto",
+  "init": false
   "ports": {
     "8080/tcp": 8080
   },
