@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
 # Clone Fermentrack repository
 RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack \
     && cd /app/fermentrack \
-    && pip3 install django-constance[database] gunicorn
+    && pip3 install django-constance[database] 
+    && pip3 install gunicorn
 RUN ls -l /app
 
 # Set working directory
