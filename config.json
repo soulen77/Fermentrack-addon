@@ -16,12 +16,7 @@
   "schema": {
     "django_secret_key": "str",
     "database_path": "str?"
-  },
-  "build": {
-    "scripts": [
-      "COPY run.sh /app/fermentrack/run.sh",
-      "RUN chmod +x /app/fermentrack/run.sh"
-    ],
+},
     "environment": {
       "DJANGO_SECRET_KEY": "your-secret-key"
     }
