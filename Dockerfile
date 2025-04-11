@@ -13,7 +13,7 @@ RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack \
 RUN ls -l /app
 
 # Set working directory
-WORKDIR /app/fermentrack
+WORKDIR /app/fermentrack/fermentrack_django
 
 # Copy the entrypoint script
 COPY run.sh /app/fermentrack/run.sh
