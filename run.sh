@@ -21,4 +21,4 @@ fi
 
 # Start the Django server with production-ready configurations
 echo "Starting Fermentrack..."
-exec python manage.py runserver 0.0.0.0:8080
+exec /app/venv/bin/python manage.py runserver 0.0.0.0:8080
