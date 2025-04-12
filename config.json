@@ -14,7 +14,7 @@
   "config:rw",
   "ssl:ro",
   "data:rw"
-  }
+  },
   "options": {
     "django_secret_key": "django_secret_key",
     "database_path": "data/db.sqlite3"
