@@ -10,4 +10,10 @@
     "8080/tcp": 8080
   },
   "map": ["config:rw", "ssl", "share", "addons:rw"]
+"options": {
+  "data_path": "/config/fermentrack"
+},
+"schema": {
+  "data_path": "str"
+ }
 }
