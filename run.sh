@@ -1,21 +1,16 @@
 #!/bin/bash
 
-set -e  # Exit on any error
+# Ensure the Fermentrack directory exists in persistent storage
+mkdir -p "${FERMENTRACK_DATA_PATH}"
 
-echo "Starting Fermentrack Add-on..."
+# Link db.sqlite3 to persistent storage
+if [ ! -f "${FERMENTRACK_DATA_PATH}/db.sqlite3" ]; then
+    cp /app/fermentrack/db.sqlite3 "${FERMENTRACK_DATA_PATH}/db.sqlite3"
+fi
+ln -sf "${FERMENTRACK_DATA_PATH}/db.sqlite3" /app/fermentrack/db.sqlite3
 
-# Set Django secret key
-export DJANGO_SECRET_KEY="${DJANGO_SECRET_KEY:-default-secret-key}"
+# (Same can be done for logs, backups, or media folders if needed)
 
-# Run database migrations
-echo "Running database migrations..."
-python3 manage.py migrate
-
-# Collect static files
-echo "Collecting static files..."
-python3 manage.py collectstatic --noinput || true
-
-# Start the Django server with Gunicorn
-echo "Starting Django server with Gunicorn..."
-exec gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0:8080 --workers 3 --log-level info
-
+# Run Fermentrack
+cd /app/fermentrack
+exec gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0.8080
