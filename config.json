@@ -2,14 +2,14 @@
   "name": "Fermentrack",
   "version": "1.0",
   "slug": "fermentrack",
-  "description": "A Home Assistant add-on to run Fermentrack",
-  "arch": ["amd64", "armv7", "aarch64"],
-  "startup": "application",
+  "description": "Fermentrack for Home Assistant",
+  "startup": "services",
   "boot": "auto",
-  "init": "false",
-  "ports":
+  "ingress": false,
+  "panel_icon": "mdi:beer",
+  "ports": {
     "8080/tcp": 8080
-  "map": ["config:rw", "ssl:ro", "data:rw"],
+  },
   "options": {
     "django_secret_key": "django_secret_key",
     "database_path": "data/db.sqlite3"
