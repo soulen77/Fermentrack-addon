@@ -13,7 +13,7 @@
   "options": {
     "django_secret_key": "django_secret_key",
     "database_path": "data/db.sqlite3"
-  },
+   },
   "schema": {
     "django_secret_key": "str",
     "database_path": "str?"
