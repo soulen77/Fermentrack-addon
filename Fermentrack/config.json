@@ -12,5 +12,5 @@
   },
   "map": ["config:rw", "data:rw"],
   "image": "local/aarch64-addon-fermentrack",
-  "arch": "aarch64",
+  "arch": "aarch64"
 }
