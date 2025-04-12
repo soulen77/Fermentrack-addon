@@ -22,6 +22,6 @@
    },
     "environment": {
       "DJANGO_SECRET_KEY": "your-secret-key"
-    },
+    }
   }
 
