@@ -6,9 +6,8 @@
   "startup": "services",
   "boot": "auto",
   "ingress": "false",
-  "panel_icon": "mdi:beer",
   "ports": {
-    "8080/tcp": "8080"
+    "8080/tcp": "8080",
   },
   "options": {
     "django_secret_key": "django_secret_key",
