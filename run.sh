@@ -1,16 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Ensure the Fermentrack directory exists in persistent storage
-mkdir -p "${FERMENTRACK_DATA_PATH}"
+DB_FILE="/config/fermentrack/db.sqlite3"
 
-# Link db.sqlite3 to persistent storage
-if [ ! -f "${FERMENTRACK_DATA_PATH}/db.sqlite3" ]; then
-    cp /app/fermentrack/db.sqlite3 "${FERMENTRACK_DATA_PATH}/db.sqlite3"
+# Ensure the destination directory exists
+mkdir -p /config/fermentrack
+
+# If the DB doesn't exist, initialize it
+if [ ! -f "$DB_FILE" ]; then
+    echo "Database not found, running migrations..."
+    python3 /app/fermentrack/manage.py migrate
+    cp /app/fermentrack/db.sqlite3 "$DB_FILE"
+else
+    echo "Using existing database"
+    cp "$DB_FILE" /app/fermentrack/db.sqlite3
 fi
-ln -sf "${FERMENTRACK_DATA_PATH}/db.sqlite3" /app/fermentrack/db.sqlite3
 
-# (Same can be done for logs, backups, or media folders if needed)
-
-# Run Fermentrack
+# Start the app
 cd /app/fermentrack
-exec gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0.8080
+exec gunicorn fermentrack_django.wsgi:application --bind "0.0.0.0:8000"
