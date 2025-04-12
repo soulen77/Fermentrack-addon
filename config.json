@@ -10,13 +10,13 @@
     "8080/tcp": 8080
   },
   "map": ["config:rw", "ssl", "share", "addons:rw"],
-"environment": {
-  "FERMENTRACK_DATA_PATH": "/data"
-},
-"options": {
-  "data_path": "/config/fermentrack"
-},
-"schema": {
-  "data_path": "str"
- }
+  "environment": {
+    "FERMENTRACK_DATA_PATH": "/data"
+  },
+  "options": {
+    "data_path": "/config/fermentrack"
+  },
+  "schema": {
+    "data_path": "str"
+  }
 }
