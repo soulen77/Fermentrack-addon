@@ -7,14 +7,9 @@
   "startup": "application",
   "boot": "auto",
   "init": "false",
-  "ports": {
+  "ports":
     "8080/tcp": 8080
-  },
-  "map": {
-  "config:rw",
-  "ssl:ro",
-  "data:rw"
-  },
+  "map": ["config:rw","ssl:ro","data:rw"],
   "options": {
     "django_secret_key": "django_secret_key",
     "database_path": "data/db.sqlite3"
@@ -22,7 +17,7 @@
   "schema": {
     "django_secret_key": "str",
     "database_path": "str?"
-},
+   },
     "environment": {
       "DJANGO_SECRET_KEY": "your-secret-key"
     }
