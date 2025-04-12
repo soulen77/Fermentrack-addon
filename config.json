@@ -12,7 +12,7 @@
   },
   "map": ["config:rw", "data:rw"],
   "image": "local/aarch64-addon-fermentrack"
-  "arch": ["aarch64"],
+  "arch": ["aarch64"]
   "options": {
     "django_secret_key": "django_secret_key",
     "database_path": "data/db.sqlite3"
