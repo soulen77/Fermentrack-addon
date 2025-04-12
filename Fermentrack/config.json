@@ -11,6 +11,6 @@
     "8080/tcp": 8080
   },
   "map": ["config:rw", "data:rw"],
-  "image": "local/aarch64-addon-fermentrack"
-  "arch": "aarch64"
+  "image": "local/aarch64-addon-fermentrack",
+  "arch": "aarch64",
 }
