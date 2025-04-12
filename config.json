@@ -9,7 +9,7 @@
   "init": "false",
   "ports":
     "8080/tcp": 8080
-  "map": ["config:rw","ssl:ro","data:rw"],
+  "map": ["config:rw", "ssl:ro", "data:rw"],
   "options": {
     "django_secret_key": "django_secret_key",
     "database_path": "data/db.sqlite3"
