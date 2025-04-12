@@ -11,16 +11,5 @@
     "8080/tcp": 8080
   },
   "map": ["config:rw", "data:rw"],
-  "arch": ["aarch64"]
-  "options":
-    "django_secret_key": "django_secret_key",
-    "database_path": "data/db.sqlite3",
-  "schema": {
-    "django_secret_key": "str",
-    "database_path": "str?"
-   },
-    "environment": {
-      "DJANGO_SECRET_KEY": "your-secret-key"
-    }
-  }
-
+  "image": "local/aarch64-addon-fermentrack"
+}
