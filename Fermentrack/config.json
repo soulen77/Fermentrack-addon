@@ -2,15 +2,12 @@
   "name": "Fermentrack",
   "version": "1.0",
   "slug": "fermentrack",
-  "description": "Fermentrack for Home Assistant",
+  "description": "A Home Assistant add-on to run Fermentrack",
   "startup": "services",
   "boot": "auto",
-  "ingress": false,
-  "panel_icon": "mdi:beer",
+  "arch": ["aarch64"],
   "ports": {
     "8080/tcp": 8080
   },
-  "map": ["config:rw", "data:rw"],
-  "image": "local/aarch64-addon-fermentrack",
-  "arch": ["aarch64"]
+  "map": ["config:rw", "ssl", "share", "addons:rw"]
 }
