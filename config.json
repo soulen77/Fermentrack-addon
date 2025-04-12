@@ -18,10 +18,10 @@
    },
   "schema": {
     "django_secret_key": "str",
-    "database_path": "str?",
+    "database_path": "str?"
    },
     "environment": {
-      "DJANGO_SECRET_KEY": "your-secret-key",
+      "DJANGO_SECRET_KEY": "your-secret-key"
     },
   }
 
