@@ -10,7 +10,7 @@
   "ports": {
     "8080/tcp": 8080
   },
-  "map": ["config:rw"],
+  "map": ["config:rw", "data:rw"],
   "options": {},
   "schema": {},
   "arch": ["aarch64", "armv7", "armhf", "amd64", "i386"]
