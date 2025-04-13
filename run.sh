@@ -1,48 +1,38 @@
-#!/bin/bash
-
-set -e
-
-APP_DIR="/app/fermentrack"
-DATA_DIR="/data"
-SETTINGS_SRC="$DATA_DIR/settings_local.py"
-SETTINGS_DST="$APP_DIR/fermentrack_django/settings_local.py"
-DB_FILE="$DATA_DIR/db.sqlite3"
+#!/usr/bin/with-contenv bashio
 
 export FERMENTRACK_BASE=/config/fermentrack
+cd /app/fermentrack
 
-# Generate a default settings_local.py if not present
-if [ ! -f /app/fermentrack/settings_local.py ]; then
-    echo "Generating default settings_local.py..."
-    # Commands to generate the filr
-    cat <<EOF > "$SETTINGS_SRC"
-DEBUG = False
-ALLOWED_HOSTS = ['*']
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '$DB_FILE',
-    }
-}
-STATIC_ROOT = '$APP_DIR/static'
-EOF
+# Ensure persistent data directory exists
+mkdir -p "$FERMENTRACK_BASE"
+
+# Generate settings_local.py if it doesn't exist
+if [ ! -f "$FERMENTRACK_BASE/settings_local.py" ]; then
+  echo "Generating default settings_local.py..."
+  cp /app/fermentrack/settings_local.py.example "$FERMENTRACK_BASE/settings_local.py"
 fi
 
-# Copy settings_local.py into project
-cp "$SETTINGS_SRC" "$SETTINGS_DST"
+# Symlink settings_local.py so Django uses the persistent one
+ln -sf "$FERMENTRACK_BASE/settings_local.py" /app/fermentrack/settings_local.py
 
-# Create DB if it doesn't exist
-if [ ! -f "$DB_FILE" ]; then
-    echo "Initializing database..."
-    python3 manage.py migrate
+# Initialize database if it doesn't exist
+if [ ! -f "$FERMENTRACK_BASE/db.sqlite3" ]; then
+  echo "Creating persistent database..."
+  python3 manage.py migrate
+  cp db.sqlite3 "$FERMENTRACK_BASE/db.sqlite3"
 fi
+
+# Symlink persistent database
+ln -sf "$FERMENTRACK_BASE/db.sqlite3" /app/fermentrack/db.sqlite3
+
+# Run migrations again (safe even if already applied)
+echo "Initializing database..."
+python3 manage.py migrate --noinput
 
 # Collect static files
 echo "Collecting static files..."
 python3 manage.py collectstatic --noinput
 
-# Start the app with Gunicorn
+# Start Gunicorn
 echo "Starting Gunicorn..."
-exec gunicorn fermentrack_django.wsgi:application \
-    --bind 0.0.0.0:8080 \
-    --workers 3 \
-    --timeout 90
+exec gunicorn --bind 0.0.0.0:8080 --workers 3 fermentrack.wsgi:application
