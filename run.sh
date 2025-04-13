@@ -14,7 +14,7 @@ export PYTHONPATH="$FERMENTRACK_DIR"
 # If settings_local.py doesn't exist, generate it from example
 if [ ! -f "$FERMENTRACK_DIR/settings_local.py" ]; then
     echo "Generating default settings_local.py..."
-    cp example_settings/settings_local.py.example "$FERMENTRACK_DIR/settings_local.py"
+    cp settings_local.py "$FERMENTRACK_DIR/settings_local.py"
 fi
 
 # Run database migrations
