@@ -27,7 +27,7 @@ ENV DJANGO_SECRET_KEY=supersecret \
     PYTHONPATH="/app"
 
 # Set working directory
-WORKDIR /app/fermentrack
+WORKDIR /app/
 
 # Expose the web port
 EXPOSE 8080
