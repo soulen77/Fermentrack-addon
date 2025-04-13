@@ -5,18 +5,19 @@ set -e
 FERMENTRACK_DIR="/app/fermentrack"
 
 # Change to the Fermentrack app directory
-cd /app/fermentrack
+cd "$FERMENTRACK_DIR"
 
-# Set up environment variables if needed
+# Set up environment variables
 export DJANGO_SETTINGS_MODULE=fermentrack.settings
+export PYTHONPATH="/app"
 
-# If settings_local.py doesn't exist, generate it
+# If settings_local.py doesn't exist, generate it from example
 if [ ! -f "$FERMENTRACK_DIR/settings_local.py" ]; then
     echo "Generating default settings_local.py..."
-    cp settings_local.py "$FERMENTRACK_DIR/settings_local.py"
+    cp example_settings/settings_local.py.example "$FERMENTRACK_DIR/settings_local.py"
 fi
 
-# Run migrations
+# Run database migrations
 echo "Initializing database..."
 python3 manage.py migrate --noinput
 
