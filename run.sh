@@ -9,7 +9,7 @@ cd "$FERMENTRACK_DIR"
 
 # Set up environment variables
 export DJANGO_SETTINGS_MODULE=fermentrack.settings
-export PYTHONPATH="/app"
+export PYTHONPATH="$FERMENTRACK_DIR"
 
 # If settings_local.py doesn't exist, generate it from example
 if [ ! -f "$FERMENTRACK_DIR/settings_local.py" ]; then
