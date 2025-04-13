@@ -1,9 +1,21 @@
-# settings_local.py.example
+from .settings import *
 
-DEBUG = False
+# Enable debugging in development
+DEBUG = True
+
+# Allow access from any host
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
 
-# Optional: Set this if you want to override database, secret key, etc.
-# SECRET_KEY = 'your-secret-key'
-# DATABASES = { ... }
+# Database settings can optionally be customized here
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+# Static files directory (optional override)
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Constance config backend if using django-constance with database
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
