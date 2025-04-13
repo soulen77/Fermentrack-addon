@@ -26,7 +26,7 @@ ENV DJANGO_SECRET_KEY=supersecret \
     FERMENTRACK_DATA_PATH=/data
 
 # Set working directory
-WORKDIR /app/fermentrack
+WORKDIR /app/
 
 COPY settings_local.py.example /app/fermentrack/settings_local.py.example
 
