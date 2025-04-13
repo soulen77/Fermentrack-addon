@@ -16,10 +16,6 @@ RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack && \
     pip3 install -r requirements.txt && \
     pip3 install django-constance[database] gunicorn
 
-# Copy run script
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
-
 # Create required folders
 RUN mkdir -p /data
 
