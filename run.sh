@@ -18,12 +18,12 @@ if [ ! -f "$FERMENTRACK_DIR/fermentrack/fermentrack_django/settings.py" ]; then
 fi
 
 # Run database migrations
-echo "Initializing database..."
-python3 manage.py migrate --noinput
+# echo "Initializing database..."
+#python3 manage.py migrate --noinput
 
 # Collect static files
-echo "Collecting static files..."
-python3 manage.py collectstatic --noinput
+# echo "Collecting static files..."
+#python3 manage.py collectstatic --noinput
 
 # Start Gunicorn
 echo "Starting Fermentrack with Gunicorn..."
