@@ -2,7 +2,7 @@
 set -e
 
 # Define the Fermentrack app directory
-FERMENTRACK_DIR="/app/fermentrack"
+FERMENTRACK_DIR="/app/"
 
 # Change to the Fermentrack app directory
 cd "$FERMENTRACK_DIR"
