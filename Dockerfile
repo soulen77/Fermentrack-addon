@@ -28,7 +28,7 @@ ENV DJANGO_SECRET_KEY=supersecret \
 # Set working directory
 WORKDIR /app/
 
-COPY settings_local.py.example /app/fermentrack/settings_local.py.example
+COPY settings_local.py /app/fermentrack/settings_local.py
 
 # Expose the web port
 EXPOSE 8080
