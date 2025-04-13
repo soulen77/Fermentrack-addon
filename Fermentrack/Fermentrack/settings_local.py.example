@@ -1,0 +1,9 @@
+# settings_local.py.example
+
+DEBUG = False
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
+
+# Optional: Set this if you want to override database, secret key, etc.
+# SECRET_KEY = 'your-secret-key'
+# DATABASES = { ... }
