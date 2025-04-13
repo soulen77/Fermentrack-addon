@@ -24,7 +24,7 @@ RUN mkdir -p /data
 # Set environment variables
 ENV DJANGO_SECRET_KEY=supersecret \
     FERMENTRACK_DATA_PATH=/data \
-    PYTHONPATH=/app/fermentrack
+    PYTHONPATH="/app"
 
 # Set working directory
 WORKDIR /app/fermentrack
