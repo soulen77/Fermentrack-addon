@@ -8,6 +8,8 @@ SETTINGS_SRC="$DATA_DIR/settings_local.py"
 SETTINGS_DST="$APP_DIR/fermentrack_django/settings_local.py"
 DB_FILE="$DATA_DIR/db.sqlite3"
 
+export FERMENTRACK_BASE=/config/fermentrack
+
 # Generate a default settings_local.py if not present
 if [ ! -f /app/fermentrack/settings_local.py ]; then
     echo "Generating default settings_local.py..."
