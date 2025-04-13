@@ -1,5 +1,7 @@
 FROM debian:bullseye-slim
 
+SHELL ["/bin/bash", "-c"]
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -29,7 +31,9 @@ WORKDIR /app/fermentrack
 # Expose the web port
 EXPOSE 8080
 
+# Copy run.sh and ensure it's executable
 COPY run.sh /app/fermentrack/run.sh
 RUN chmod +x /app/fermentrack/run.sh
-CMD ["/app/fermentrack/run.sh"]
 
+# Run the startup script
+CMD ["/bin/bash", "/app/fermentrack/run.sh"]
