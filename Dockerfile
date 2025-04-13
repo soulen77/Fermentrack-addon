@@ -24,3 +24,8 @@ RUN chmod +x /app/fermentrack/run.sh
 ENV DJANGO_SECRET_KEY="your-secret-key"
 
 CMD ["bash", "/app/fermentrack/run.sh"]
+# Copy run script
+COPY run.sh /run.sh
+RUN chmod +x /run.sh
+
+CMD ["/run.sh"]
