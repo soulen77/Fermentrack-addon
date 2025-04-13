@@ -29,14 +29,12 @@ ENV DJANGO_SECRET_KEY=supersecret \
 # Set working directory
 WORKDIR /app/fermentrack
 
-# Copy settings_local.py (if available) and ensure it's placed correctly
-COPY settings_local.py /app/fermentrack/settings_local.py
-
 # Expose the web port
 EXPOSE 8080
 
 # Copy run.sh and ensure it's executable
 COPY run.sh /app/fermentrack/run.sh
+COPY settings_local.py /app/fermentrack/settings_local.py
 RUN chmod +x /app/fermentrack/run.sh
 
 # Run the startup script
