@@ -2,21 +2,15 @@
   "name": "Fermentrack",
   "version": "1.0",
   "slug": "fermentrack",
-  "description": "A Home Assistant add-on to run Fermentrack",
-  "startup": "services",
+  "description": "Fermentation monitoring and control panel",
+  "startup": "application",
   "boot": "auto",
-  "arch": ["aarch64"],
+  "init": false,
+  "host_network": false,
   "ports": {
     "8080/tcp": 8080
   },
-  "map": ["config:rw", "ssl", "share", "addons:rw"],
-  "environment": {
-    "FERMENTRACK_DATA_PATH": "/data"
-  },
-  "options": {
-    "data_path": "/config/fermentrack"
-  },
-  "schema": {
-    "data_path": "str"
-  }
+  "map": ["config:rw"],
+  "options": {},
+  "schema": {}
 }
