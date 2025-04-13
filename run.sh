@@ -9,8 +9,9 @@ SETTINGS_DST="$APP_DIR/fermentrack_django/settings_local.py"
 DB_FILE="$DATA_DIR/db.sqlite3"
 
 # Generate a default settings_local.py if not present
-if [ ! -f "$SETTINGS_SRC" ]; then
+if [ ! -f /app/fermentrack/settings_local.py ]; then
     echo "Generating default settings_local.py..."
+    # Commands to generate the filr
     cat <<EOF > "$SETTINGS_SRC"
 DEBUG = False
 ALLOWED_HOSTS = ['*']
