@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
 
 # Clone Fermentrack and install Python dependencies
 RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack && \
-    pip3 install -r /app/fermentrack/requirements.txt && \
+    cd /app/fermentrack && \
+    pip3 install -r requirements.txt && \
     pip3 install django-constance[database] gunicorn
 
 # Create required folders
@@ -23,13 +24,12 @@ RUN mkdir -p /data
 # Set environment variables
 ENV DJANGO_SECRET_KEY=supersecret \
     FERMENTRACK_DATA_PATH=/data \
-    DJANGO_SETTINGS_MODULE=fermentrack.settings \
-    PYTHONPATH=/app
+    PYTHONPATH=/app/fermentrack
 
 # Set working directory
 WORKDIR /app/fermentrack
 
-# Copy settings_local.py (this file must exist or be generated)
+# Copy settings_local.py (if available) and ensure it's placed correctly
 COPY settings_local.py /app/fermentrack/settings_local.py
 
 # Expose the web port
@@ -39,6 +39,5 @@ EXPOSE 8080
 COPY run.sh /app/fermentrack/run.sh
 RUN chmod +x /app/fermentrack/run.sh
 
-# Start script
+# Run the startup script
 CMD ["/bin/bash", "/app/fermentrack/run.sh"]
-
