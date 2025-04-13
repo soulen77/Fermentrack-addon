@@ -34,7 +34,6 @@ EXPOSE 8080
 
 # Copy run.sh and ensure it's executable
 COPY run.sh /app/fermentrack/run.sh
-COPY fermentrack/settings_local.py /app/fermentrack/settings_local.py
 RUN chmod +x /app/fermentrack/run.sh
 
 # Run the startup script
