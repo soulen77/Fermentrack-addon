@@ -13,7 +13,7 @@ export DJANGO_SETTINGS_MODULE=fermentrack.settings
 # If settings_local.py doesn't exist, generate it
 if [ ! -f "$FERMENTRACK_DIR/settings_local.py" ]; then
     echo "Generating default settings_local.py..."
-    cp /app/fermentrack/settings_local.py.example /app/fermentrack/settings_local.py
+    cp settings_local.py "$FERMENTRACK_DIR/settings_local.py"
 fi
 
 # Run migrations
