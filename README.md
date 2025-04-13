@@ -4,8 +4,6 @@ This is a Home Assistant add-on to run [Fermentrack](https://github.com/thorrak/
 
 ## Features
 - Runs Fermentrack.
-- Supports SQLite for database storage.
-- Configurable via Home Assistant add-on options.
 
 ## Installation
 1. Clone this repository into your Home Assistant `addons/local` directory:
