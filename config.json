@@ -12,6 +12,6 @@
   },
   "map": ["config:rw"],
   "options": {},
-  "schema": {}
-   "arch": ["aarch64"]
+  "schema": {},
+  "arch": ["aarch64"]
 }
