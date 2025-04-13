@@ -31,6 +31,8 @@ EXPOSE 8080
 
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
+CMD ["/run.sh"]
+
 
 #COPY run.sh /app/fermentrack/run.sh
 #RUN chmod +x /app/fermentrack/run.sh
