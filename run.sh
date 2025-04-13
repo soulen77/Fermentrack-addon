@@ -5,7 +5,7 @@ set -e
 FERMENTRACK_DIR="/app/fermentrack"
 
 # Change to the Fermentrack app directory
-cd "$FERMENTRACK_DIR"
+cd /app/fermentrack
 
 # Set up environment variables if needed
 export DJANGO_SETTINGS_MODULE=fermentrack.settings
