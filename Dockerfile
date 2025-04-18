@@ -1,4 +1,4 @@
-FROM ghcr.io/home-assistant/amd64-base-debian:bullseye
+FROM ghcr.io/home-assistant/base-debian:bullseye
 
 ENV LANG C.UTF-8
 
