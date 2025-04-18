@@ -1,4 +1,5 @@
-FROM debian:bullseye-slim
+ARG BUILD_FROM
+FROM $BUILD_FROM
 
 # Install prerequisites
 RUN apt-get update && apt-get install -y \
