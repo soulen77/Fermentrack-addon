@@ -1,5 +1,3 @@
-# Dockerfile
-
 FROM debian:bullseye-slim
 
 # Install dependencies
@@ -13,16 +11,21 @@ RUN apt-get update && apt-get install -y \
     curl \
     && apt-get clean
 
-# Clone the Fermentrack repo and install dependencies
-RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack && \
-    cd /app/fermentrack && \
-    pip3 install -r requirements.txt && \
+# Clone Fermentrack
+RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack
+
+# Install Python dependencies
+WORKDIR /app/fermentrack
+RUN pip3 install -r requirements.txt && \
     pip3 install django-constance[database] gunicorn
 
-# Copy the config and run script
-COPY settings_local.py /app/fermentrack/settings_local.py
-COPY scripts/run /app/fermentrack/run.sh
-COPY scripts/fermentrack-run scripts/fermentrack-ru
+# Copy local config files
+COPY run.sh /app/fermentrack/run.sh
+COPY fermentrack/settings_local.py /app/fermentrack/fermentrack/settings_local.py
+RUN chmod +x /app/fermentrack/run.sh
 
-# Set the entry point for running Fermentrack
-ENTRYPOINT ["/scripts/fermentrack-run"]
+# Set working directory and expose port
+WORKDIR /app/fermentrack
+EXPOSE 8080
+
+CMD ["/app/fermentrack/run.sh"]
