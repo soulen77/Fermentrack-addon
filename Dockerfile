@@ -1,26 +1,37 @@
-# Use the official Python base image
-FROM ghcr.io/hassio-addons/base-python:3.11
+# Use a different Python base image if necessary
+FROM python:3.11-slim
 
-# Set environment variables
-ENV LANG C.UTF-8
-ENV PYTHONUNBUFFERED=1
-ENV DJANGO_SETTINGS_MODULE=fermentrack_django.settings
+# Install required dependencies for building the Fermentrack add-on
+RUN apt-get update \
+    && apt-get install -y \
+    build-essential \
+    libffi-dev \
+    libssl-dev \
+    libpq-dev \
+    python3-dev \
+    python3-pip \
+    libjpeg-dev \
+    zlib1g-dev \
+    liblcms2-dev \
+    libblas-dev \
+    liblapack-dev \
+    gfortran \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
 
-# Copy the source code to the container
+# Copy Fermentrack source code into the container
 COPY . /app
 
 # Install Python dependencies
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Collect static files
-RUN python manage.py collectstatic --noinput || true
+# Set up the environment for Django
+ENV PYTHONUNBUFFERED 1
 
-# Expose port 8080 (default for Fermentrack)
+# Expose the necessary port
 EXPOSE 8080
 
-# Start the app using Gunicorn
-CMD ["gunicorn", "fermentrack_django.wsgi:application", "--bind", "0.0.0.0:8080"]
+# Command to run Fermentrack application
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "fermentrack.wsgi:application"]
