@@ -22,7 +22,7 @@ RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack && \
 # Copy the config and run script
 COPY settings_local.py /app/fermentrack/settings_local.py
 COPY scripts/run /app/fermentrack/run.sh
-COPY scripts/fermentrack-run /app/fermentrack/fermentrack-run
+COPY scripts/fermentrack-run scripts/fermentrack-ru
 
 # Set the entry point for running Fermentrack
 ENTRYPOINT ["/scripts/fermentrack-run"]
