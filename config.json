@@ -12,5 +12,6 @@
   },
   "map": ["config:rw"],
   "options": {},
-  "schema": {}
+  "schema": {},
+  "arch": ["amd64", "aarch64", "armv7"]
 }
