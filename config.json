@@ -13,6 +13,5 @@
   },
   "map": ["config:rw"],
   "options": {},
-  "schema": {},
-  "image": "local/fermentrack"
+  "schema": {}
 }
