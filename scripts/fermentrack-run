@@ -1,8 +1,0 @@
-#!/bin/bash
-# /scripts/fermentrack-run
-
-# Ensure that virtual environment is active
-source /app/fermentrack/venv/bin/activate
-
-# Run the Gunicorn server with the WSGI app
-exec gunicorn --bind 0.0.0.0:8080 fermentrack.wsgi:application
