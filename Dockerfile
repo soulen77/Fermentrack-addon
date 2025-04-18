@@ -1,4 +1,5 @@
-FROM ghcr.io/home-assistant/base-debian:bullseye
+ARG BUILD_ARCH
+FROM ghcr.io/home-assistant/${BUILD_ARCH}-base-debian:bullseye
 
 ENV LANG C.UTF-8
 
