@@ -11,12 +11,18 @@ RUN apt-get update && apt-get install -y \
     curl \
     && apt-get clean
 
-# Add s6-overlay universal, then extract only the aarch64 bits
-RUN curl -L -o /tmp/s6-overlay.tar.gz https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz && \
-    curl -L -o /tmp/s6-overlay-aarch64.tar.gz https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-aarch64.tar.xz && \
+ENV S6_OVERLAY_VERSION=v3.1.1.0
+
+# Install xz-utils so we can extract .tar.xz
+RUN apt-get update && apt-get install -y xz-utils
+
+# Download and extract S6 overlay
+RUN curl -L -o /tmp/s6-overlay-noarch.tar.xz https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz && \
+    curl -L -o /tmp/s6-overlay-aarch64.tar.xz https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-aarch64.tar.xz && \
     tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz && \
-    tar -C / -zxpf /tmp/s6-overlay-aarch64.tar.gz && \
+    tar -C / -Jxpf /tmp/s6-overlay-aarch64.tar.xz && \
     rm -rf /tmp/s6-overlay*
+
 
 # Clone the Fermentrack repo and install dependencies
 RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack && \
