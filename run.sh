@@ -20,8 +20,7 @@ fi
 done
 
 # Start the Django server with production-ready configurations
-echo "Starting web server"
-exec /usr/local/bin/gunicorn fermentrack.wsgi:application \
+exec python3 -m gunicorn fermentrack.wsgi:application \
     --bind 0.0.0.0:8080 \
     --workers 3 \
     --chdir "$FERMENTRACK_DIR"
