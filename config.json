@@ -24,9 +24,9 @@
     "auto_update": true,
     "update_interval": 60,
     "max_log_size": 5000000,
-    "log_rotate": true
-     }
-  "schema": 
+    "log_rotate": true,
+      },
+  "schema": {
     "web_port": "int",
     "persistence": "str",
     "debug": "bool",
@@ -43,5 +43,7 @@
     "max_log_size": "int",
     "log_rotate": "bool",
     "allowed_ips": "list"
+  },
+  "image": "ghcr.io/thorrak/fermentrack:latest",
   "arch": ["aarch64", "amd64", "armhf", "armv7"]
 }
