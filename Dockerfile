@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM debian:bullseye-slim
 
 # Clone Fermentrack repository
 RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack \
