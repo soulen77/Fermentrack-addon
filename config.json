@@ -25,7 +25,8 @@
     "update_interval": 60,
     "max_log_size": 5000000,
     "log_rotate": true,
-      },
+    "allowed_ips": []
+  },
   "schema": {
     "web_port": "int",
     "persistence": "str",
