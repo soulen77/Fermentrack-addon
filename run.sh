@@ -14,10 +14,10 @@ if ! python3 manage.py migrate; then
     exit 1
 fi
 # Check if the database is ready (optional, useful for non-SQLite setups)
-# echo "Waiting for database to be ready..."
-# until python3 manage.py dbshell; do
-#     sleep 1
-# done
+ echo "Waiting for database to be ready..."
+ until python3 manage.py dbshell; do
+   sleep 1
+done
 
 # Start the Django server with production-ready configurations
 echo "Starting Django server with Gunicorn..."
