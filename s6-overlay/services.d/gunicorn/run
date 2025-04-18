@@ -1,9 +1,0 @@
-#!/usr/bin/with-contenv bash
-# Start Gunicorn for Fermentrack
-
-echo "[INFO] Starting Gunicorn..."
-cd /app/fermentrack || exit 1
-
-exec gunicorn fermentrack.wsgi:application \
-    --bind 0.0.0.0:8080 \
-    --workers 3
