@@ -1,22 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
-# Set the environment variable for Django settings
-export DJANGO_SETTINGS_MODULE=fermentrack.settings
+# Path to Fermentrack
+FERMENTRACK_DIR="/app/fermentrack"
 
-# Initialize the database if necessary
-if [ ! -f /app/fermentrack/settings_local.py ]; then
-    cp /app/fermentrack/settings_local.py /app/fermentrack/settings_local.py
-fi
+cd "$FERMENTRACK_DIR"
+
+# Set environment variables
+export DJANGO_SETTINGS_MODULE=fermentrack.settings
+export PYTHONPATH="$FERMENTRACK_DIR"
 
 # Run migrations
-echo "Running database migrations..."
-python3 /app/fermentrack/manage.py migrate --noinput
+echo "Applying database migrations..."
+python3 manage.py migrate --noinput
 
 # Collect static files
 echo "Collecting static files..."
-python3 /app/fermentrack/manage.py collectstatic --noinput
+python3 manage.py collectstatic --noinput
 
-# Start Gunicorn with 3 workers
-echo "Starting Gunicorn..."
-exec gunicorn fermentrack.wsgi:application --bind 0.0.0.0:8080 --workers 3 --chdir /app/fermentrack
+# Start Gunicorn
+echo "Starting Fermentrack with Gunicorn..."
+exec /usr/local/bin/gunicorn fermentrack.wsgi:application \
+    --bind 0.0.0.0:8000 \
+    --workers 3 \
+    --chdir "$FERMENTRACK_DIR"
