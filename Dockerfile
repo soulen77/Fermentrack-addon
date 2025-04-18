@@ -1,20 +1,35 @@
-FROM debian:bullseye-slim
+FROM ghcr.io/home-assistant/amd64-base-debian:bullseye
 
-# Clone Fermentrack repository
-RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack \
-    && cd /app/fermentrack \
-    && pip3 install -r requirements.txt \
-    && pip3 install django-constance[database]
-RUN ls -l /app
+ENV LANG C.UTF-8
 
-# Set working directory
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    python3 \
+    python3-pip \
+    python3-venv \
+    nginx \
+    sqlite3 \
+    && apt-get clean
+
+# Set up working directory
+WORKDIR /app
+
+# Clone Fermentrack
+RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack
+
+# Install Python dependencies
 WORKDIR /app/fermentrack
+RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir gunicorn django-constance[database]
 
-# Copy the entrypoint script
+# Copy local settings
+COPY settings_local.py /app/fermentrack/settings_local.py
 COPY run.sh /app/fermentrack/run.sh
 RUN chmod +x /app/fermentrack/run.sh
 
-# Set environment variables
-ENV DJANGO_SECRET_KEY="your-secret-key"
+# Expose port
+EXPOSE 8080
 
-CMD ["bash", "/app/fermentrack/run.sh"]
+# Entry point
+CMD ["/app/fermentrack/run.sh"]
