@@ -49,6 +49,6 @@
     "update_interval": "int",
     "max_log_size": "int",
     "log_rotate": "bool",
-    "allowed_ips": "list"
+    "allowed_ips": "list(str)"
   }
 }
