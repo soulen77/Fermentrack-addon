@@ -26,7 +26,7 @@
     "max_log_size": 5000000,
     "log_rotate": true
     }
-  "schema": {
+  "schema":{
     "web_port": "int",
     "persistence": "str",
     "debug": "bool",
