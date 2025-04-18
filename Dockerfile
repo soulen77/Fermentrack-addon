@@ -1,36 +1,37 @@
-ARG BUILD_ARCH
-FROM ghcr.io/home-assistant/${BUILD_ARCH}-base-debian:bullseye
+FROM ghcr.io/home-assistant/aarch64-base-debian:bullseye
 
-ENV LANG C.UTF-8
-
-# Install system dependencies
+# Install required dependencies
 RUN apt-get update && apt-get install -y \
     git \
     python3 \
     python3-pip \
     python3-venv \
-    nginx \
     sqlite3 \
+    nginx \
+    curl \
     && apt-get clean
 
-# Set up working directory
-WORKDIR /app
+# Install s6-overlay
+RUN curl -L https://github.com/just-containers/s6-overlay/releases/download/v3.1.1.0/s6-overlay-amd64.tar.gz | tar xz -C /
 
-# Clone Fermentrack
-RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack
+# Set up directories
+RUN mkdir -p /app/fermentrack /config /data
 
-# Install Python dependencies
-WORKDIR /app/fermentrack
-RUN pip3 install --no-cache-dir -r requirements.txt
-RUN pip3 install --no-cache-dir gunicorn django-constance[database]
+# Clone the Fermentrack repository
+RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack && \
+    cd /app/fermentrack && \
+    pip3 install -r requirements.txt && \
+    pip3 install django-constance[database] gunicorn
 
-# Copy local settings
+# Copy configuration files
 COPY settings_local.py /app/fermentrack/settings_local.py
 COPY run.sh /app/fermentrack/run.sh
 RUN chmod +x /app/fermentrack/run.sh
 
-# Expose port
+# Expose the port
 EXPOSE 8080
 
-# Entry point
+# Use s6-overlay as the entrypoint
+ENTRYPOINT ["/init"]
 CMD ["/app/fermentrack/run.sh"]
+
