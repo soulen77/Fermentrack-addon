@@ -20,7 +20,6 @@ RUN git clone https://github.com/thorrak/fermentrack.git /app/fermentrack && \
     pip3 install django-constance[database] gunicorn
 
 # Copy the config and run script
-COPY settings_local.py /app/fermentrack/settings_local.py
 COPY run.sh /app/fermentrack/run.sh
 COPY fermentrack-run /scripts/fermentrack-run
 
