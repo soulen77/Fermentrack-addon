@@ -1,33 +1,24 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/bash
 
-# Define the Fermentrack app directory
-FERMENTRACK_DIR="/app/"
+set -e  # Exit on any error
 
-# Change to the Fermentrack app directory
-cd "$FERMENTRACK_DIR"
+echo "Starting Fermentrack Add-on..."
 
-# Set up environment variables
-export DJANGO_SETTINGS_MODULE=fermentrack.settings
-export PYTHONPATH="$FERMENTRACK_DIR"
-
-# If settings_local.py doesn't exist, generate it from example
-if [ ! -f "$FERMENTRACK_DIR/fermentrack/fermentrack_django/settings.py" ]; then
-    echo "Generating default settings_local.py..."
-    cp /settings_local.py "$FERMENTRACK_DIR/fermentrack/fermentrack_django/settings.py"
-fi
+# Set Django secret key
+export DJANGO_SECRET_KEY="${DJANGO_SECRET_KEY:-default-secret-key}"
 
 # Run database migrations
-# echo "Initializing database..."
-#python3 manage.py migrate --noinput
+echo "Running database migrations..."
+if ! python3 manage.py migrate; then
+    echo "Migration failed. Check the logs for details."
+    exit 1
+fi
+# Check if the database is ready (optional, useful for non-SQLite setups)
+# echo "Waiting for database to be ready..."
+# until python3 manage.py dbshell; do
+#     sleep 1
+# done
 
-# Collect static files
-# echo "Collecting static files..."
-#python3 manage.py collectstatic --noinput
-
-# Start Gunicorn
-echo "Starting Fermentrack with Gunicorn..."
-exec gunicorn fermentrack.wsgi:application \
-    --bind 0.0.0.0:8080 \
-    --workers 3 \
-    --chdir "$FERMENTRACK_DIR"
+# Start the Django server with production-ready configurations
+echo "Starting Django server with Gunicorn..."
+exec gunicorn fermentrack.wsgi:application --bind 0.0.0.0:8080 --workers 3 --log-level info
