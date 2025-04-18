@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+# Start Nginx
+
+echo "[INFO] Starting Nginx..."
+exec nginx -g "daemon off;"
