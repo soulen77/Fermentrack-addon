@@ -25,25 +25,6 @@
     "update_interval": 60,
     "max_log_size": 5000000,
     "log_rotate": true
-   },
-  "schema":{
-    "web_port": "int",
-    "persistence": "str",
-    "debug": "bool",
-    "allow_remote_access": "bool",
-    "enable_ssl": "bool",
-    "ssl_cert_path": "str",
-    "ssl_key_path": "str",
-    "log_level": "str",
-    "log_file": "str",
-    "timezone": "str",
-    "default_language": "str",
-    "auto_update": "bool",
-    "update_interval": "int",
-    "max_log_size": "int",
-    "log_rotate": "bool",
-    "allowed_ips": "list"
-  },
-  "arch": ["aarch64", "amd64", "armhf", "armv7"]
+    "arch": ["aarch64", "amd64", "armhf", "armv7"]
 }
 
