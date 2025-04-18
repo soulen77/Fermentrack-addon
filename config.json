@@ -1,19 +1,18 @@
 {
-  "name": "Fermentrack",
-  "version": "0.1.0",
-  "slug": "fermentrack",
-  "description": "Fermentrack Home Assistant Addon",
-  "arch": ["aarch64", "amd64"],
-  "startup": "application",
-  "boot": "auto",
-  "ports": {
-    "8080/tcp": 8080
-  },
-  "map": ["config:rw", "ssl:rw"],
-  "volumes": ["fermentrack_data:rw"],
-  "build_from": {
-    "context": ".",
-    "dockerfile": "Dockerfile"
-  },
-  "homeassistant_api": true
+  "web_port": 8080,
+  "persistence": "/config/fermentrack/",
+  "debug": false,
+  "allow_remote_access": false,
+  "enable_ssl": false,
+  "ssl_cert_path": "/config/ssl/fullchain.pem",
+  "ssl_key_path": "/config/ssl/privkey.pem",
+  "log_level": "INFO",
+  "log_file": "/config/fermentrack/fermentrack.log",
+  "timezone": "UTC",
+  "default_language": "en",
+  "auto_update": true,
+  "update_interval": 60,
+  "max_log_size": 5000000,
+  "log_rotate": true,
+  "allowed_ips": []
 }
