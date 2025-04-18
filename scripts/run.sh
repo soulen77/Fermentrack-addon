@@ -1,26 +1,8 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/bash
+# /scripts/run.sh
 
-# Path to Fermentrack
-FERMENTRACK_DIR="/app/fermentrack"
+# Ensure that virtual environment is activated
+source /app/fermentrack/venv/bin/activate
 
-cd "$FERMENTRACK_DIR"
-
-# Set environment variables
-export DJANGO_SETTINGS_MODULE=fermentrack.settings
-export PYTHONPATH="$FERMENTRACK_DIR"
-
-# Run migrations
-echo "Applying database migrations..."
-python3 manage.py migrate --noinput
-
-# Collect static files
-echo "Collecting static files..."
-python3 manage.py collectstatic --noinput
-
-# Start Gunicorn
-echo "Starting Fermentrack with Gunicorn..."
-exec /usr/local/bin/gunicorn fermentrack.wsgi:application \
-    --bind 0.0.0.0:8000 \
-    --workers 3 \
-    --chdir "$FERMENTRACK_DIR"
+# Run the Fermentrack application (this is optional, if you want to run additional tasks before Fermentrack)
+exec gunicorn --bind 0.0.0.0:8080 fermentrack.wsgi:application
