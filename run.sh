@@ -4,6 +4,13 @@ cd /config/fermentrack
 # Fetch DJANGO_SECRET_KEY from Home Assistant add-on options
 export DJANGO_SECRET_KEY="${Django_Secret_Key:-changeme123}"
 
+# Optional: Link /config if needed for persistent storage
+if [ ! -d /config/fermentrack ]; then
+    mkdir -p /config/fermentrack
+fi
+
+ln -sf /config/fermentrack/db.sqlite3 /opt/fermentrack/db.sqlite3
+
 # Activate virtual environment
 source /config/fermentrack/venv/bin/activate
 
