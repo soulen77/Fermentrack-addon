@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
-
 cd /app
-source venv/bin/activate
-export DJANGO_SETTINGS_MODULE=fermentrack_django.settings
 
-python manage.py migrate --noinput
+# Ensure database migrations are applied
+python3 manage.py migrate --noinput
 
-# Launch from project directory
-cd fermentrack_django
+# Start Gunicorn with the correct WSGI app
 gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0:8080
