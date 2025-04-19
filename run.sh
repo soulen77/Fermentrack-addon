@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-cd /app
 
-# Set up DB path override
+cd /app
+source venv/bin/activate
 export DJANGO_SETTINGS_MODULE=fermentrack_django.settings
 
-# Apply migrations
-python3 manage.py migrate --noinput
+python manage.py migrate --noinput
 
-# Start Gunicorn on port 8080
+# Launch from project directory
+cd fermentrack_django
 gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0:8080
