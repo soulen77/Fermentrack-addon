@@ -6,27 +6,34 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONPATH="/app"
 
-# Install build dependencies
+# Install dependencies
 RUN apk add --no-cache \
     python3 py3-pip py3-psycopg2 \
     bash git gcc musl-dev libffi-dev \
     openssl-dev python3-dev cargo \
     jpeg-dev zlib-dev
 
-# Create working directory
+# Set working directory
 WORKDIR /app
 
-# Clone Fermentrack
+# Clone Fermentrack repo
 RUN git clone https://github.com/thorrak/fermentrack.git /app
 
-# Copy in the addon startup script
+# Copy startup script
 COPY run.sh /app/run.sh
 RUN chmod a+x /app/run.sh
 
-# Use Fermentrack's requirements
-RUN pip3 install --no-cache-dir -r /app/requirements.txt
+# Create virtual environment and install dependencies inside it
+RUN python3 -m venv /app/venv && \
+    . /app/venv/bin/activate && \
+    pip install --upgrade pip && \
+    pip install -r /app/requirements.txt
 
-# Fix default database path
+# Ensure app uses venv python
+ENV PATH="/app/venv/bin:$PATH"
+
+# Environment for Fermentrack DB persistence
 ENV FERMENTRACK_DB_PATH="/config/fermentrack/db.sqlite3"
 
+# Start app
 CMD [ "/app/run.sh" ]
