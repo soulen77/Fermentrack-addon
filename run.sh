@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-cd /config/fermentrack || exit 1
+cd /config/fermentrack
 
 # Fetch DJANGO_SECRET_KEY from Home Assistant add-on options
 export DJANGO_SECRET_KEY="${Django_Secret_Key:-changeme123}"
 
 # Activate virtual environment
-source venv/bin/activate
+source /config/fermentrack/venv/bin/activate
 
 # Run migrations
 python manage.py migrate --noinput
@@ -14,4 +14,4 @@ python manage.py migrate --noinput
 python manage.py collectstatic --noinput
 
 # Start Gunicorn
-exec venv/bin/gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0:8080
+exec /config/fermentrack/venv/bin/gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0:8080
