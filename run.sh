@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 cd /app
 
-# Set a default secret key if none is provided
+# Set DJANGO_SECRET_KEY from environment or default
 export DJANGO_SECRET_KEY="${DJANGO_SECRET_KEY:-changeme123}"
 
-# Activate the virtual environment
-. /app/venv/bin/activate
+# Activate virtual environment
+source /app/venv/bin/activate
 
 # Run migrations
-python3 manage.py migrate --noinput
+python manage.py migrate --noinput
 
-# Start Gunicorn using the venv version
+# Collect static files
+python manage.py collectstatic --noinput
+
+# Start Gunicorn
 exec /app/venv/bin/gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0:8080
