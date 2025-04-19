@@ -23,10 +23,10 @@ RUN apk add --no-cache \
     bash
 
 # Setup app directory
-WORKDIR /app
+WORKDIR /config/fermentrack
 
 # Clone the Fermentrack repository
-RUN git clone https://github.com/thorrak/fermentrack.git /app
+RUN git clone https://github.com/thorrak/fermentrack.git /config/fermentrack
 
 # Create and activate virtualenv
 RUN python3 -m venv /app/venv && \
