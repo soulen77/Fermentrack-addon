@@ -1,4 +1,3 @@
-# Set the base image
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
@@ -28,14 +27,14 @@ WORKDIR /config/fermentrack
 # Clone the Fermentrack repository
 RUN git clone https://github.com/thorrak/fermentrack.git /config/fermentrack
 
-# Create and activate virtualenv
-RUN python3 -m venv /app/venv && \
-    /app/venv/bin/pip install --upgrade pip && \
-    /app/venv/bin/pip install --no-cache-dir -r /config/fermentrack/requirements.txt gunicorn setuptools
+# Create and activate virtualenv in the working directory
+RUN python3 -m venv /config/fermentrack/venv && \
+    /config/fermentrack/venv/bin/pip install --upgrade pip && \
+    /config/fermentrack/venv/bin/pip install --no-cache-dir -r /config/fermentrack/requirements.txt gunicorn setuptools
 
-# Copy run script
-COPY run.sh /app/run.sh
-RUN chmod +x /app/run.sh
+# Copy run script to the correct directory
+COPY run.sh /config/fermentrack/run.sh
+RUN chmod +x /config/fermentrack/run.sh
 
-# Set entrypoint
-CMD ["/app/run.sh"]
+# Set entrypoint to use the correct path
+CMD ["/config/fermentrack/run.sh"]
