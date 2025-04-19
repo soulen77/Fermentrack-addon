@@ -23,7 +23,7 @@ RUN apk add --no-cache \
     bash
 
 # Setup app directory
-WORKDIR /data/fermentrack
+WORKDIR /data
 
 # Clone the Fermentrack repository
 RUN git clone https://github.com/thorrak/fermentrack.git /data/fermentrack
@@ -34,11 +34,11 @@ RUN python3 -m venv /data/fermentrack/venv && \
     /data/fermentrack/venv/bin/pip install --no-cache-dir -r /data/fermentrack/requirements.txt gunicorn setuptools
 
 # Copy run script to the correct directory
-COPY run.sh /data/fermentrack/run.sh
-RUN chmod +x /data/fermentrack/run.sh
+COPY run.sh /data/run.sh
+RUN chmod +x /data/run.sh
 
 # Debug: List directory contents and print script
-RUN ls -l /data/fermentrack && echo "--- run.sh ---" && cat /data/fermentrack/run.sh
+RUN ls -l /data && echo "--- run.sh ---" && cat /data/run.sh
 
 # Set entrypoint
-CMD ["/data/fermentrack/run.sh"]
+CMD ["/data/run.sh"]
