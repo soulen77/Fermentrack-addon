@@ -1,7 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
+cd /app
 
-# Ensure that the database is initialized (only run once)
-python3 /app/manage.py migrate --noinput || true
+# Set up DB path override
+export DJANGO_SETTINGS_MODULE=fermentrack_django.settings
 
-# Start the Gunicorn server
-exec gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0:8080
+# Apply migrations
+python3 manage.py migrate --noinput
+
+# Start Gunicorn on port 8080
+gunicorn fermentrack_django.wsgi:application --bind 0.0.0.0:8080
