@@ -4,7 +4,8 @@ FROM $BUILD_FROM
 ENV LANG C.UTF-8
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONPATH="/app"
+ENV PYTHONPATH="/app/fermentrack_django"
+
 
 # Install dependencies
 RUN apk add --no-cache \
