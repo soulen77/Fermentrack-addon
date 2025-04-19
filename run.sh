@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 cd /app
 
-# Set DJANGO_SECRET_KEY from environment or default
-export DJANGO_SECRET_KEY="${DJANGO_SECRET_KEY:-changeme123}"
+# Fetch DJANGO_SECRET_KEY from Home Assistant add-on options
+export DJANGO_SECRET_KEY="${Django_Secret_Key:-changeme123}"
 
 # Activate virtual environment
 source /app/venv/bin/activate
