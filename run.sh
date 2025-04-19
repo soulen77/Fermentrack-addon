@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd /data/fermentrack
+cd /data
 
 export DJANGO_SECRET_KEY="${Django_Secret_Key:-changeme123}"
 
