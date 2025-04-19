@@ -1,44 +1,17 @@
-# Set the base image
-ARG BUILD_FROM
-FROM $BUILD_FROM
+# Set working directory
+WORKDIR /opt/fermentrack
 
-# Set environment variables
-ENV LANG C.UTF-8
+# Clone the repo
+RUN git clone https://github.com/thorrak/fermentrack.git /opt/fermentrack
 
-# Install dependencies
-RUN apk add --no-cache \
-    python3 \
-    py3-pip \
-    py3-virtualenv \
-    libffi-dev \
-    openssl-dev \
-    gcc \
-    musl-dev \
-    python3-dev \
-    git \
-    py3-setuptools \
-    postgresql-dev \
-    jpeg-dev \
-    zlib-dev \
-    bash
+# Install and activate virtualenv
+RUN python3 -m venv /opt/fermentrack/venv && \
+    /opt/fermentrack/venv/bin/pip install --upgrade pip && \
+    /opt/fermentrack/venv/bin/pip install --no-cache-dir -r /opt/fermentrack/requirements.txt gunicorn setuptools
 
-# Setup app directory
-WORKDIR /config/fermentrack
+# Copy run script
+COPY run.sh /opt/fermentrack/run.sh
+RUN chmod +x /opt/fermentrack/run.sh
 
-# Clone the Fermentrack repository
-RUN git clone https://github.com/thorrak/fermentrack.git /config/fermentrack
-
-# Create and activate virtualenv in the working directory
-RUN python3 -m venv /config/fermentrack/venv && \
-    /config/fermentrack/venv/bin/pip install --upgrade pip && \
-    /config/fermentrack/venv/bin/pip install --no-cache-dir -r /config/fermentrack/requirements.txt gunicorn setuptools
-
-# Copy run script to the correct directory
-COPY run.sh /config/fermentrack/run.sh
-RUN chmod +x /config/fermentrack/run.sh
-
-# Debug: List directory contents and print script
-RUN ls -l /config/fermentrack && echo "--- run.sh ---" && cat /config/fermentrack/run.sh
-
-# Set entrypoint
-CMD ["/config/fermentrack/run.sh"]
+# Entrypoint
+CMD ["/opt/fermentrack/run.sh"]
