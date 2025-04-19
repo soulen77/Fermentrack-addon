@@ -1,6 +1,6 @@
 {
   "name": "Fermentrack",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "slug": "fermentrack",
   "description": "Fermentrack for Home Assistant",
   "arch": ["aarch64", "amd64", "armv7", "i386"],
