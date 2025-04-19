@@ -22,20 +22,23 @@ RUN apk add --no-cache \
     zlib-dev \
     bash
 
-# Set working directory
+# Setup app directory
 WORKDIR /config/fermentrack
 
-# Clone the Fermentrack repo
+# Clone the Fermentrack repository
 RUN git clone https://github.com/thorrak/fermentrack.git /config/fermentrack
 
-# Set up virtual environment and install requirements
+# Create and activate virtualenv in the working directory
 RUN python3 -m venv /config/fermentrack/venv && \
     /config/fermentrack/venv/bin/pip install --upgrade pip && \
-    /config/fermentrack/venv/bin/pip install --no-cache-dir -r requirements.txt gunicorn setuptools
+    /config/fermentrack/venv/bin/pip install --no-cache-dir -r /config/fermentrack/requirements.txt gunicorn setuptools
 
-# Copy the run script
+# Copy run script to the correct directory
 COPY run.sh /config/fermentrack/run.sh
 RUN chmod +x /config/fermentrack/run.sh
+
+# Debug: List directory contents and print script
+RUN ls -l /config/fermentrack && echo "--- run.sh ---" && cat /config/fermentrack/run.sh
 
 # Set entrypoint
 CMD ["/config/fermentrack/run.sh"]
