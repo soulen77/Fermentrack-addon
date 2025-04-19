@@ -3,32 +3,35 @@ FROM $BUILD_FROM
 
 # Set environment variables
 ENV LANG C.UTF-8
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
 
 # Install dependencies
 RUN apk add --no-cache \
-    python3 py3-pip py3-psycopg2 \
-    bash git gcc musl-dev libffi-dev \
-    openssl-dev python3-dev cargo \
-    jpeg-dev zlib-dev
+    python3 \
+    py3-pip \
+    py3-virtualenv \
+    libffi-dev \
+    openssl-dev \
+    gcc \
+    musl-dev \
+    python3-dev \
+    git \
+    py3-setuptools \
+    postgresql-dev \
+    jpeg-dev \
+    zlib-dev \
+    bash
 
-# Set working directory
+# Setup app directory
 WORKDIR /app
 
-# Clone Fermentrack repository
-RUN git clone https://github.com/thorrak/fermentrack.git /app
+# Copy Fermentrack source code
+COPY fermentrack /app
 
-# Create virtual environment and install requirements
+# Create and activate virtualenv
 RUN python3 -m venv /app/venv && \
-    . /app/venv/bin/activate && \
-    pip install --no-cache-dir -r /app/requirements.txt
+    /app/venv/bin/pip install --upgrade pip && \
+    /app/venv/bin/pip install --no-cache-dir -r requirements.txt gunicorn setuptools
 
-ENV DJANGO_SECRET_KEY="your_super_secret_key_here"
-
-# Copy startup script and make it executable
+# Copy run script
 COPY run.sh /app/run.sh
-RUN chmod +x /app/run.sh
-
-# Set entrypoint
-ENTRYPOINT ["/app/run.sh"]
+RUN chmod +
