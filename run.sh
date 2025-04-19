@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd /app
+cd /config/fermentrack
 
 # Fetch DJANGO_SECRET_KEY from Home Assistant add-on options
 export DJANGO_SECRET_KEY="${Django_Secret_Key:-changeme123}"
