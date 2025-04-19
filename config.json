@@ -12,7 +12,9 @@
   "map": [
     "config:rw"
   ],
-  "options": {},
+  "options": {
+  "django_secret_key": "your_super_secret_key_here"
+}
   "schema": {},
   "arch": ["aarch64","amd64","armv7"]
 }
