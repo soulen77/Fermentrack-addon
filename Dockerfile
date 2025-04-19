@@ -24,6 +24,8 @@ RUN python3 -m venv /app/venv && \
     . /app/venv/bin/activate && \
     pip install --no-cache-dir -r /app/requirements.txt
 
+ENV DJANGO_SECRET_KEY="your_super_secret_key_here"
+
 # Copy startup script and make it executable
 COPY run.sh /app/run.sh
 RUN chmod +x /app/run.sh
