@@ -29,6 +29,7 @@ RUN pip install -r requirements.txt
 
 # Set up the environment for Django
 ENV PYTHONUNBUFFERED 1
+ENV PYTHONPATH="/app"
 
 # Expose the necessary port
 EXPOSE 8080
