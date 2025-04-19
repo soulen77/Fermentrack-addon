@@ -1,20 +1,25 @@
 {
   "name": "Fermentrack",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "slug": "fermentrack",
-  "description": "Fermentrack running as a Home Assistant add-on",
-  "startup": "services",
+  "description": "Fermentrack for Home Assistant",
+  "arch": ["aarch64", "amd64", "armv7", "i386"],
+  "startup": "application",
   "boot": "auto",
-  "webui": "http://[HOST]:[PORT:8080]",
   "ports": {
     "8080/tcp": 8080
   },
-  "map": [
-    "config:rw"
-  ],
+  "map": ["config:rw", "ssl", "addons", "backup", "share"],
   "options": {
-  "django_secret_key": "your_super_secret_key_here"
-},
-  "schema": {},
-  "arch": ["aarch64","amd64","armv7"]
+    "django_secret_key": "changeme123"
+  },
+  "schema": {
+    "django_secret_key": "str"
+  },
+  "init": false,
+  "ingress": true,
+  "ingress_port": 8080,
+  "panel_icon": "mdi:beer",
+  "panel_title": "Fermentrack",
+  "webui": "http://[HOST]:[PORT:8080]"
 }
