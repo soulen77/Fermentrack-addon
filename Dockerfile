@@ -31,7 +31,7 @@ RUN git clone https://github.com/thorrak/fermentrack.git /config/fermentrack
 # Create and activate virtualenv
 RUN python3 -m venv /app/venv && \
     /app/venv/bin/pip install --upgrade pip && \
-    /app/venv/bin/pip install --no-cache-dir -r /app/requirements.txt gunicorn setuptools
+    /app/venv/bin/pip install --no-cache-dir -r /config/fermentrack/requirements.txt gunicorn setuptools
 
 # Copy run script
 COPY run.sh /app/run.sh
