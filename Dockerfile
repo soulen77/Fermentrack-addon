@@ -1,11 +1,10 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
+# Set environment variables
 ENV LANG C.UTF-8
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONPATH="/app"
-
 
 # Install dependencies
 RUN apk add --no-cache \
@@ -17,24 +16,17 @@ RUN apk add --no-cache \
 # Set working directory
 WORKDIR /app
 
-# Clone Fermentrack repo
+# Clone Fermentrack repository
 RUN git clone https://github.com/thorrak/fermentrack.git /app
 
-# Copy startup script
-COPY run.sh /app/run.sh
-RUN chmod a+x /app/run.sh
-
-# Create virtual environment and install dependencies inside it
+# Create virtual environment and install requirements
 RUN python3 -m venv /app/venv && \
     . /app/venv/bin/activate && \
-    pip install --upgrade pip && \
-    pip install -r /app/requirements.txt
+    pip install --no-cache-dir -r /app/requirements.txt
 
-# Ensure app uses venv python
-ENV PATH="/app/venv/bin:$PATH"
+# Copy startup script and make it executable
+COPY run.sh /app/run.sh
+RUN chmod +x /app/run.sh
 
-# Environment for Fermentrack DB persistence
-ENV FERMENTRACK_DB_PATH="/config/fermentrack/db.sqlite3"
-
-# Start app
-CMD [ "/app/run.sh" ]
+# Set entrypoint
+ENTRYPOINT ["/app/run.sh"]
