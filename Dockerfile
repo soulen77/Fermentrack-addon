@@ -1,17 +1,17 @@
 # Set working directory
-WORKDIR /opt/fermentrack
+WORKDIR /data/fermentrack
 
 # Clone the repo
-RUN git clone https://github.com/thorrak/fermentrack.git /opt/fermentrack
+RUN git clone https://github.com/thorrak/fermentrack.git /data/fermentrack
 
 # Install and activate virtualenv
 RUN python3 -m venv /opt/fermentrack/venv && \
-    /opt/fermentrack/venv/bin/pip install --upgrade pip && \
-    /opt/fermentrack/venv/bin/pip install --no-cache-dir -r /opt/fermentrack/requirements.txt gunicorn setuptools
+    /data/fermentrack/venv/bin/pip install --upgrade pip && \
+    /data/fermentrack/venv/bin/pip install --no-cache-dir -r /data/fermentrack/requirements.txt gunicorn setuptools
 
 # Copy run script
-COPY run.sh /opt/fermentrack/run.sh
-RUN chmod +x /opt/fermentrack/run.sh
+COPY run.sh /data/fermentrack/run.sh
+RUN chmod +x /data/fermentrack/run.sh
 
 # Entrypoint
-CMD ["/opt/fermentrack/run.sh"]
+CMD ["/data/fermentrack/run.sh"]
